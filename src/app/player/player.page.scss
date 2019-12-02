@@ -1,12 +1,10 @@
-
- 
 .home-card{
- --background: #fff url('../../assets/img/ionic-sound-wallpaper.jpg') no-repeat center center/cover;
+    --background: #fff url('../../assets/img/ionic-sound-wallpaper.jpg') no-repeat center center/cover;
 }
 ion-toolbar {
     --background-color: transparent;
     --ion-color-base: transparent !important;
-  }
-  .bg-transparent {
+}
+.bg-transparent {
     background: transparent;
   }

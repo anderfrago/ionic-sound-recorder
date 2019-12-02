@@ -1,0 +1,75 @@
+<ion-header class="bg-transparent" >
+    <ion-toolbar  color="medium" lines="none">
+    <ion-button [routerLink]="['/home']" routerDirection="back" color="light">
+      <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+    </ion-button>
+    <ion-title slot="end" color="medium">Grabadora de audio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding home-card">
+  <ion-card color="dark">
+    <ion-card-header>
+      <ion-card-header>
+        <ion-card-title>
+          <ion-grid fixed>
+            <ion-row>
+              <ion-col size="8">
+                  {{name}}                
+              </ion-col>
+              <ion-col size="4">
+                  <ion-button color="danger" (click)="editAudioName(audio.id, i)">
+                      <ion-icon  slot="icon-only"  name="create"></ion-icon>
+                  </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-title>
+        <div>
+          <ion-range min="0" max="{{duration}}" [(ngModel)]="position">
+            <!--  [disabled]="is_in_play && is_playing"  -->
+            <ion-label slot="start">{{ position*1000 | date:'mm:ss' }}</ion-label>
+            <ion-label slot="end" *ngIf="duration == -1">--:--</ion-label>
+            <ion-label slot="end" *ngIf="duration != -1">{{ duration*1000 | date:'mm:ss' }}</ion-label>
+          </ion-range>
+        </div>
+      </ion-card-header>
+    </ion-card-header>
+    <ion-card-content>
+
+        <!-- control bar -->
+        <ion-grid>
+          <ion-row class="ion-align-items-center ion-justify-content-center" style="height: 100%">
+            <ion-col>
+              <!-- Backwards -->
+              <ion-fab-button class="skip-btn" color="primary" [disabled]="!is_ready || !is_in_play"
+                (click)="controlSeconds('back')">
+                &nbsp;&nbsp;<ion-icon name="skip-backward"></ion-icon>&nbsp;&nbsp;
+              </ion-fab-button>
+            </ion-col>
+            <ion-col>
+              <!-- Play/Pause -->
+              <ion-fab-button class="play-pause-btn" (click)="playRecording()" color="primary" *ngIf="!is_playing"
+                [disabled]="!is_ready">
+                <ion-icon name="play"></ion-icon>
+              </ion-fab-button>
+
+              <ion-fab-button class="play-pause-btn" (click)="pausePlayRecording()" color="secondary" *ngIf="is_playing"
+                [disabled]="!is_ready">
+                <ion-icon name="pause"></ion-icon>
+              </ion-fab-button>
+            </ion-col>
+            <ion-col>
+              <!-- Forwards -->
+              <ion-fab-button class="skip-btn" color="primary" [disabled]="!is_ready || !is_in_play"
+                (click)="controlSeconds('forward')">
+                &nbsp;&nbsp;<ion-icon name="skip-forward"></ion-icon>&nbsp;&nbsp;
+              </ion-fab-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
